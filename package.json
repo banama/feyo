@@ -1,0 +1,25 @@
+{
+  "name": "feyo",
+  "version": "1.0.0",
+  "description": "yo project of fe",
+  "main": "yo feyo",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "yo feyo:test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/banama/feyo"
+  },
+  "keywords": [
+    "yo"
+  ],
+  "author": "banama",
+  "license": "mit",
+  "bugs": {
+    "url": "https://github.com/banama/feyo/issues"
+  },
+  "homepage": "https://github.com/banama/feyo"
+}

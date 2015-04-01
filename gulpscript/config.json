@@ -1,0 +1,17 @@
+{
+    "app": {        
+        "style": ["../static/base/", "../static/activity/"],
+        "script": ["../static/base/", "../static/activity/"]
+    },
+    "task": {
+        "jshint": "jshint",
+        "browserify": "browserify",
+        "jsHash": "jsHash",
+        "scss": "scss",
+        "css": "css",
+        "cssHash": "cssHash",
+        "temp": "temp",
+
+        "cleanAll": "cleanAll"
+    }
+}
