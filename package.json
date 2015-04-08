@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "yo project of fe",
   "main": "yo feyo",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "yo feyo:test"
   },
@@ -22,7 +19,5 @@
     "url": "https://github.com/banama/feyo/issues"
   },
   "homepage": "https://github.com/banama/feyo",
-  "devDependencies": {
-    "underscore": "^1.8.2"
-  }
+  "devDependencies": {}
 }

@@ -3,7 +3,6 @@ var yeoman = require('yeoman-generator');
 var util = require('util')
 var chalk = require('chalk');
 var yosay = require('yosay');
-var cfg = require('./config.json')
 var _ = require('underscore')
 
 var Generator = module.exports = function Generator(args, options, config){

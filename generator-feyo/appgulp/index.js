@@ -20,7 +20,6 @@ Generator.prototype.gulp = function(){
   this.mkdir(this.appname + 'gulp')
   var temp = '../../../gulpscript'
   var dest = this.appname + 'gulp'
-  console.log(this.templatePath(temp))
   this.directory(
       this.templatePath(temp),
       this.destinationPath(dest)

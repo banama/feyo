@@ -11,22 +11,8 @@ var Generator = module.exports = function Generator(args, options, config){
 
 util.inherits(Generator, yeoman.generators.Base);
 
-Generator.prototype.ask = function(){
-  var cb = this.async();
-
-  // have Yeoman greet the user.
-  // console.log(this);
-
-  var prompts = [{
-    type    : 'input',
-    name    : 'name',
-    message : 'Your project name?',
-    default : 'feyo'
-  }];
-
-  this.prompt(prompts, function (props) {
-    this.name = props.name;
-    console.log(this.name)
-    cb();
-  }.bind(this));
+Generator.prototype.help = function(){
+    console.log(yosay('- h'))
+    console.log('yo feyo:apps appname')
+    console.log('yo feyo:appgulp appname')
 }

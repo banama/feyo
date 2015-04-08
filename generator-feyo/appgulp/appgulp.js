@@ -1,5 +1,4 @@
 var gulp = require('gulp')
-var config = require('./config.json')
 
 var jshint = require('./jshint')
 var browserify = require('./browserify')
