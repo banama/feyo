@@ -1,7 +1,6 @@
 var jade = require('gulp-jade')
 var gulp = require('gulp')
 var source = require('vinyl-source-stream')
-var config = require("./config.json")
 
 function init(task){
     gulp.task(task, function(){

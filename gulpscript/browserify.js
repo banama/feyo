@@ -2,10 +2,10 @@ var gulp = require('gulp')
 var browserifys = require('browserify')
 var source = require('vinyl-source-stream')
 
-function browserifyF(file, filePath){
+function browserifyF(filename, file, filePath){
     browserifys(file)
         .bundle()
-        .pipe(source('app.bundle.js'))
+        .pipe(source(filename))
         .pipe(gulp.dest(filePath))
 }
 
