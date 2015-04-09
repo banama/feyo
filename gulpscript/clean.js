@@ -2,7 +2,7 @@ var gulp = require('gulp')
 var clean = require('gulp-clean')
 
 function cleanF(path){
-    gulp.src(path, {read: false})
+    return gulp.src(path, {read: false})
         .pipe(clean({force: true}))
 }
 

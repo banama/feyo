@@ -2,7 +2,7 @@ var gulp = require('gulp')
 var revCollector = require('gulp-rev-collector')
 
 function revF(revJSON, tempFile, tempPath){
-    gulp.src([revJSON, tempFile])
+    return gulp.src([revJSON, tempFile])
         .pipe(revCollector({
             replaceReved: true
         }))

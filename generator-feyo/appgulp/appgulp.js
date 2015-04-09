@@ -4,7 +4,7 @@ var jshint = require('./jshint')
 var browserify = require('./browserify')
 var scss = require('./scss')
 var css = require('./css')
-var uncss = require('./uncss')
+// var uncss = require('./uncss')
 var hash = require('./hash')
 var clean = require('./clean')
 var rev = require('./rev').revF
@@ -15,16 +15,15 @@ gulp.task('scss', function(){
     scss.scssF('../scss/*.scss', '../css')
 })
 
-gulp.task('uncss', function(){
-    uncss.uncssF('../css/*.css', ['index.html'], '../css')
-})
+// gulp.task('uncss', function(){
+//     uncss.uncssF('../css/*.css', ['index.html'], '../css')
+// })
 
 gulp.task('cssmin', function(){
     css.cssF('../css/*.css', '../dist/css')
 })
 
 gulp.task('csshash', function(){
-    // clean.cleanF('../dist/css')
     hash.hashcssF('../dist/css/*.css', '../dist/css/hash/', '../dist/css')
 })
 
@@ -43,25 +42,45 @@ gulp.task('browserify', function(){
 })
 
 gulp.task('jshash', function(){
-    // clean.cleanF('../dist/js')
-    hash.hashjsF('../dist/js/*.js', '../dist/js/hash/', '../dist/js')       
+    hash.hashjsF('../dist/js/*.js', '../dist/js/hash/', '../dist/js')
 })
 
-gulp.task('revjs', function(){
-    rev('../dist/js/rev-manifest.json', '../jade/index.html', '../jade')
+
+// clean
+gulp.task('cleancss', function(){
+    clean.cleanF('../dist/css/hash/')
+})
+
+gulp.task('cleanjs', function(){
+    clean.cleanF('../dist/js/hash/')
 })
 
 gulp.task('clean', function(){
     clean.cleanF('../dist/')
 })
 
+// task
 gulp.task('run', function(){
-    gulp.watch(['../scss/*.scss', '../css/*.css', '../css/*.css'], ['cssbase', 'revcss'])
-    gulp.watch(['../js/*.js', '../js/app.js', '../dist/js/*.js'], ['jsbase', 'revjs'])
+    gulp.watch(['../scss/*.scss'], ['cleancss', 'scss'])
+    gulp.watch(['../css/*.css'], ['cssmin'])
+    gulp.watch(['../dist/css/*.css'], ['csshash'])
+    gulp.watch(['../dist/css/hash/*.css'], ['revcss'])
+
+    gulp.watch(['../js/*.js'], ['jshint', 'cleanjs', 'browserify'])
+    gulp.watch(['../dist/js/*.js'], ['jshash'])
+    gulp.watch(['../dist/js/hash/*.js'], ['revjs'])
+})
+
+gulp.task('build', function(){
+    // rev js
+    rev('../dist/js/rev-manifest.json', '../jade/index.html', '../jade')
+
+    //rev css
+    rev('../dist/css/rev-manifest.json', '../jade/index.html', '../jade')
 })
 
 // test
-gulp.task('uncss', function(){
-    uncss.uncssF('./test/css.css', ['index.html'], './test')
-})
+// gulp.task('uncss', function(){
+//     uncss.uncssF('./test/css.css', ['index.html'], './test')
+// })
 

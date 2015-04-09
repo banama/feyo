@@ -3,7 +3,7 @@ var browserifys = require('browserify')
 var source = require('vinyl-source-stream')
 
 function browserifyF(filename, file, filePath){
-    browserifys(file)
+    return browserifys(file)
         .bundle()
         .pipe(source(filename))
         .pipe(gulp.dest(filePath))

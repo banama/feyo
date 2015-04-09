@@ -3,7 +3,7 @@ var rev = require('gulp-rev')
 var uglify = require('gulp-uglify');
 
 function hashcssF(file, hashFilePath, revPath){
-    gulp.src(file)
+    return gulp.src(file)
         .pipe(rev())
         .pipe(gulp.dest(hashFilePath))
         .pipe(rev.manifest())
@@ -12,7 +12,7 @@ function hashcssF(file, hashFilePath, revPath){
 }
 
 function hashjsF(file, hashFilePath, revPath){
-    gulp.src(file)
+    return gulp.src(file)
         .pipe(uglify())
         .pipe(rev())
         .pipe(gulp.dest(hashFilePath))
