@@ -4,7 +4,7 @@
   "description": "yo project of fe",
   "main": "yo feyo",
   "scripts": {
-    "test": "yo feyo:test"
+    "sprite": "ndoe c.js"
   },
   "repository": {
     "type": "git",
