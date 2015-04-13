@@ -12,7 +12,7 @@ var rev = require('./rev').revF
 
 // css
 gulp.task('scss', function(){
-    scss.scssF('../scss/*.scss', '../css')
+    scss.scssF('../scss/*.scss', '../css/')
 })
 
 // gulp.task('uncss', function(){
@@ -20,7 +20,7 @@ gulp.task('scss', function(){
 // })
 
 gulp.task('cssmin', function(){
-    css.cssF('../css/*.css', '../dist/css')
+    css.cssF('../css/*.css', '../dist/css/')
 })
 
 gulp.task('csshash', function(){
@@ -38,21 +38,21 @@ gulp.task('jshint', function(){
 })
 
 gulp.task('browserify', function(){
-    browserify.browserifyF('app.bundle.js', '../js/app.js', '../dist/js')
+    browserify.browserifyF('app.bundle.js', '../js/app.js', '../dist/js/')
 })
 
 gulp.task('jshash', function(){
-    hash.hashjsF('../dist/js/*.js', '../dist/js/hash/', '../dist/js')
+    hash.hashjsF('../dist/js/*.js', '../dist/js/hash/', '../dist/js/')
 })
 
 
 // clean
 gulp.task('cleancss', function(){
-    clean.cleanF('../dist/css/hash/')
+    clean.cleanF('../dist/css/hash/*')
 })
 
 gulp.task('cleanjs', function(){
-    clean.cleanF('../dist/js/hash/')
+    clean.cleanF('../dist/js/hash/*')
 })
 
 gulp.task('clean', function(){
@@ -63,12 +63,10 @@ gulp.task('clean', function(){
 gulp.task('run', function(){
     gulp.watch(['../scss/*.scss'], ['cleancss', 'scss'])
     gulp.watch(['../css/*.css'], ['cssmin'])
-    gulp.watch(['../dist/css/*.css'], ['csshash'])
-    gulp.watch(['../dist/css/hash/*.css'], ['revcss'])
+    gulp.watch(['../dist/css/*.css'], ['csshash', 'build'])
 
     gulp.watch(['../js/*.js'], ['jshint', 'cleanjs', 'browserify'])
-    gulp.watch(['../dist/js/*.js'], ['jshash'])
-    gulp.watch(['../dist/js/hash/*.js'], ['revjs'])
+    gulp.watch(['../dist/js/*.js'], ['jshash', 'build'])
 })
 
 gulp.task('build', function(){
@@ -78,7 +76,6 @@ gulp.task('build', function(){
     //rev css
     rev('../dist/css/rev-manifest.json', '../jade/index.html', '../jade')
 })
-
 // test
 // gulp.task('uncss', function(){
 //     uncss.uncssF('./test/css.css', ['index.html'], './test')
