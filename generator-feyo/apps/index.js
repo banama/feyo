@@ -24,5 +24,5 @@ Generator.prototype.gulp = function(){
   this.mkdir(this.appname + '/scss')
   this.mkdir(this.appname + '/jade')
   this.mkdir(this.appname + '/dist/js/hash')
-  this.appname(this.appname + '/dist/css/hash')
+  this.mkdir(this.appname + '/dist/css/hash')
 }
