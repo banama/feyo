@@ -9,28 +9,21 @@ var hash = require('./hash')
 var clean = require('./clean')
 var rev = require('./rev').revF
 
+var livereload = require('gulp-livereload');
+
 
 // css
 gulp.task('scss', function(){
     scss.scssF('../scss/*.scss', '../css/')
 })
 
-// gulp.task('uncss', function(){
-//     uncss.uncssF('../css/*.css', ['index.html'], '../css')
-// })
-
 gulp.task('cssmin', function(){
-    css.cssF('../css/*.css', '../dist/css/')
+    css.cssF('../css/*.css', '../../../static/*/dist/css/')
 })
 
 gulp.task('csshash', function(){
-    hash.hashcssF('../dist/css/*.css', '../dist/css/hash/', '../dist/css')
+    hash.hashcssF('../../../static/*/dist/css/*.css', '../../../static/*/dist/css/hash/', '../../../static/*/dist/css')
 })
-
-gulp.task('revcss', function(){
-    rev('../dist/css/rev-manifest.json', '../jade/index.html', '../jade')
-})
-
 
 // js
 gulp.task('jshint', function(){
@@ -38,45 +31,57 @@ gulp.task('jshint', function(){
 })
 
 gulp.task('browserify', function(){
-    browserify.browserifyF('app.bundle.js', '../js/app.js', '../dist/js/')
+    browserify.browserifyF('app.bundle.js', '../js/app.js', '../../../static/*/dist/js/')
 })
 
 gulp.task('jshash', function(){
-    hash.hashjsF('../dist/js/*.js', '../dist/js/hash/', '../dist/js/')
+    hash.hashjsF('../../../static/*/dist/js/*.js', '../../../static/*/dist/js/hash/', '../../../static/*/dist/js/')
 })
 
 
 // clean
 gulp.task('cleancss', function(){
-    clean.cleanF('../dist/css/hash/*')
+    clean.cleanF('../../../static/*/dist/css/hash/*')
 })
 
 gulp.task('cleanjs', function(){
-    clean.cleanF('../dist/js/hash/*')
+    clean.cleanF('../../../static/*/dist/js/hash/*')
 })
 
 gulp.task('clean', function(){
-    clean.cleanF('../dist/')
+    clean.cleanF('../../../static/*/dist/')
+})
+
+//live reload
+gulp.task('livereload', function(){
+    server.changeed('../../../templates')
 })
 
 // task
 gulp.task('run', function(){
+    var server = livereload.listen();
+    //live reload
+    // require a chrome plugin
+    gulp.task('livereload', function(){
+        livereload.changed('../../../templates/company/company_page')
+    })
+    
     gulp.watch(['../scss/*.scss'], ['cleancss', 'scss'])
     gulp.watch(['../css/*.css'], ['cssmin'])
-    gulp.watch(['../dist/css/*.css'], ['csshash', 'build'])
+    gulp.watch(['../../../static/*/dist/css/*.css'], ['csshash', 'build'])
 
     gulp.watch(['../js/*.js'], ['jshint', 'cleanjs', 'browserify'])
-    gulp.watch(['../dist/js/*.js'], ['jshash', 'build'])
+    gulp.watch(['../../../static/*/dist/js/*.js'], ['jshash', 'build', 'livereload'])
 })
 
 gulp.task('build', function(){
     // rev js
-    rev('../dist/js/rev-manifest.json', '../jade/index.html', '../jade')
+    rev('../../../static/*/dist/js/rev-manifest.json', '../../../templates/*.html', '../../../templates')
 
     //rev css
-    rev('../dist/css/rev-manifest.json', '../jade/index.html', '../jade')
+    rev('../../../static/*/dist/css/rev-manifest.json', '../../../templates/*.html', '../../../templates')
 })
-// test
+
 // gulp.task('uncss', function(){
 //     uncss.uncssF('./test/css.css', ['index.html'], './test')
 // })
