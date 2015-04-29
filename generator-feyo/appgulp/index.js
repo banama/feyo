@@ -16,6 +16,7 @@ var Generator = module.exports = function Generator(args, options, config){
 util.inherits(Generator, yeoman.generators.Base);
 
 Generator.prototype.gulp = function(){
+  var self = this;
 
   this.mkdir(this.appname + 'gulp')
   var temp = '../../../gulpscript'
@@ -23,6 +24,10 @@ Generator.prototype.gulp = function(){
   this.directory(
       this.templatePath(temp),
       this.destinationPath(dest)
-  )
-  this.copy('../appgulp.js', this.appname + 'gulp/gulpfile.js')
+  );
+  this.template(
+    this.templatePath('../appgulp.js'),
+    this.destinationPath(dest + '/gulpfile.js'),
+    { appname: this.appname }
+  );
 }
