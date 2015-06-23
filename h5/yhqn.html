@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta content="telephone=no" name="format-detection" />  
+<meta content="email=no" name="format-detection" />
+<title>约会，去哪</title>
+<link rel="stylesheet" type="text/css" href="/static/css/yhqn.css?v=512">
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+<div class="up"><img src="http://lianaibiji-admin.u.qiniudn.com/bookerweima/firstpage-icon_up.png"></div>
+<div class="mask"><img src="http://lianaibiji-admin.u.qiniudn.com/bookerweima/weixin_logo_v4.png"></div>
+<div id="touchBoxCt">
+    <div id="d1">
+        <div class="box">
+            <img data-src="{{school_picture}}" alt="" data-id="img-1" id="data-image">
+            <div class="thehide page_1_position">
+              aha
+            </div>
+        </div>
+    </div>
+
+    <div id="d2">
+        <div class="box">
+            <img data-src="{{school_picture}}" alt="" data-id="img-1" id="data-image">
+            <div class="thehide page_1_position">
+              aha
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="display:none">cnzz</div>
+<script type="text/javascript">
+    var relatedApis = ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo"];
+    var shareData = {
+      img:  "http://lovenote.u.qiniudn.com/lcactivity/byjshareicon.jpg",
+      url:  "{{ share_url }}",
+      title: "{{username}}的毕业心里话，再见{{school}}，再见{{number}}",
+      desc: "{{username}}的毕业心里话，再见{{school}}，再见{{number}}"
+    };
+    {% if in_weixin %}
+    wx.config({
+        debug: {% if debug %}true{% else %}false{% endif %}, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: 'wx67afc39806248848', // 必填，公众号的唯一标识
+        timestamp: '{{ timestamp }}', // 必填，生成签名的时间戳
+        nonceStr: '{{ nonceStr }}', // 必填，生成签名的随机串
+        signature: '{{ signature }}',// 必填，签名，见附录1
+        jsApiList: relatedApis // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function () {
+      wx.checkJsApi({
+          jsApiList: relatedApis,// 需要检测的JS接口列表，所有JS接口列表见附录2,
+          success: function(res) {
+              // 以键值对的形式返回，可用的api值true，不可用为false
+              // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+            okResult = res["checkResult"];
+            if (okResult["onMenuShareTimeline"]) {
+              wx.onMenuShareTimeline({
+                title: shareData.title, // 分享标题
+                link: shareData.url, // 分享链接
+                imgUrl: shareData.img, // 分享图标
+                success: function () { 
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                }
+              });
+            } 
+            if (okResult["onMenuShareAppMessage"]) {
+              wx.onMenuShareAppMessage({
+                title: shareData.title, // 分享标题
+                desc: shareData.desc, // 分享描述
+                link: shareData.url, // 分享链接
+                imgUrl: shareData.img, // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () { 
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                }
+              });
+            } 
+            if (okResult["onMenuShareQQ"]) {
+              wx.onMenuShareQQ({
+                title: shareData.title, // 分享标题
+                desc: shareData.desc, // 分享描述
+                link: shareData.url, // 分享链接
+                imgUrl: shareData.img, // 分享图标
+                success: function () { 
+                },
+                cancel: function () { 
+                   // 用户取消分享后执行的回调函数
+                }
+              });
+            } 
+            if (okResult["onMenuShareWeibo"]) {
+              wx.onMenuShareWeibo({
+                  title: shareData.title, // 分享标题
+                  desc: shareData.desc, // 分享描述
+                  link: shareData.url, // 分享链接
+                  imgUrl: shareData.img, // 分享图标
+                  success: function () { 
+                  },
+                  cancel: function () { 
+                      // 用户取消分享后执行的回调函数
+                  }
+              });
+            } 
+          }
+      });
+    });
+    {% endif %}
+</script>
+<script type="text/javascript">var track_page = 'yhqnh5'</script>
+{% include 'mixin/track.html' %}
+<script src="/static/lib/js/touchbox.js"></script>
+<script src="/static/js/yhqn.js?v=12"></script>
+</body>
+</html>
