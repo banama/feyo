@@ -14,6 +14,7 @@ util.inherits(Generator, yeoman.generators.Base);
 Generator.prototype.help = function(){
     console.log(yosay('- h'))
     console.log('yo feyo:apps appname')
+    console.log('yo feyo:webpack')
     console.log('yo feyo:appgulp appname')
     console.log('yo feyo:test testname testClient < --server or --browser >')
 }
