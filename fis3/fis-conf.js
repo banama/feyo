@@ -35,12 +35,19 @@ fis
     })
 
 
-fis.match('/mod/*.js', {
-    isMod: true                 
-})
-fis.hook('module', {
-    mode: 'commonJS',
-    paths: {
-        mod: '/mod/'
-    }
-})
+fis
+    .set('project.ignore', [
+        'node_modules/**',
+        'package.json',
+        'npm-script.js',
+        'fis-conf.js',
+    ])
+fis
+    .match('/mod/*.js', {
+        isMod: true                 
+    })
+fis
+    .hook('module', {
+        mode: 'amd',
+        forwardDeclaration: true
+    })
