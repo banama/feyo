@@ -3,6 +3,7 @@ fis
     .match('**', {
         useHash: false
     });
+
 fis
     .media('dev')
     .match('*.scss', {
@@ -12,31 +13,34 @@ fis
 
 
 fis
-    .media('production')
-    .match('**', {
-        useHash: true
+    .media('product')
+    .match('script/*.js', {
+        optimizer: fis.plugin('uglify-js')
     })
-fis
-    .media('production')
-    .match('*.scss', {
+    .match('style/*.scss', {
         parser: fis.plugin('sass'),
         optimizer: fis.plugin('clean-css'),
         rExt: '.css'
     })
-    .match('*.css', {
+    .match('style/.css', {
         optimizer: fis.plugin('clean-css')
     })
 fis
-    .media('production')
-    .match('*.js', {
-        optimizer: fis.plugin('uglify-js')
+    .media('product')
+    .match('{style/script}/*.{js,css,scss}', {
+        useHash: true
+    })
+    .match('{style/script}/*.{js,css,scss}', {
+        release: '/static/$0'
     })
 
 
-fis.match('mod/*.js', {
+fis.match('/mod/*.js', {
     isMod: true                 
 })
-
 fis.hook('module', {
-    mode: 'amd',
+    mode: 'commonJS',
+    paths: {
+        mod: '/mod/'
+    }
 })

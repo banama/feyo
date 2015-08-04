@@ -9,9 +9,11 @@
   },
   "devDependencies": {
     "clean-css": "^3.3.7",
+    "commander": "^2.8.1",
     "fis-parser-sass": "^0.3.9",
     "fis3-hook-module": "^1.1.19",
-    "uglify-js": "^2.4.24"
+    "uglify-js": "^2.4.24",
+    "watch": "^0.16.0"
   },
   "scripts": {
     "test": " "
