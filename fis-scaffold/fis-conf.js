@@ -1,19 +1,13 @@
 fis
     .media('dev')
-    .match('**', {
-        useHash: false
-    })
-
-fis
-    .media('dev')
     .match('style/*.scss', {
         parser: fis.plugin('sass'),
-        rExt: '.css'
+        rExt: '.css',
+        release: '/static/$0'
     })
-
 fis
     .media('dev')
-    .match('{style/script}/*.{js,css,scss}', {
+    .match('script/*.js', {
         release: '/static/$0'
     })
 
@@ -21,25 +15,22 @@ fis
 fis
     .media('product')
     .match('script/*.js', {
-        optimizer: fis.plugin('uglify-js')
-    })
-    .match('style/*.scss', {
-        parser: fis.plugin('sass'),
-        optimizer: fis.plugin('clean-css'),
-        rExt: '.css'
-    })
-    .match('style/.css', {
-        optimizer: fis.plugin('clean-css')
+        useHash: true,
+        optimizer: fis.plugin('uglify-js'),
+        release: '/static/$0'
     })
 fis
     .media('product')
-    .match('{style/script}/*.{js,css,scss}', {
-        useHash: true
-    })
-    .match('{style/script}/*.{js,css,scss}', {
+    .match('style/*.scss', {
+        useHash: true,
+        parser: fis.plugin('sass'),
+        optimizer: fis.plugin('clean-css'),
+        rExt: '.css',
         release: '/static/$0'
     })
-
+    .match('style/*.css', {
+        optimizer: fis.plugin('clean-css'),
+    })
 
 fis
     .set('project.ignore', [
@@ -61,4 +52,16 @@ fis
     .hook('module', {
         mode: 'amd',
         forwardDeclaration: true
+    })
+
+    
+// : media ug-mod
+// 压缩 mod
+fis
+    .media('iproduct')
+    .match('{mod/*.js,mod/**/*.js}', {
+        optimizer: fis.plugin('uglify-js'),
+    })
+    .match('{mod/**/*.css}', {
+        optimizer: fis.plugin('clean-css'),
     })

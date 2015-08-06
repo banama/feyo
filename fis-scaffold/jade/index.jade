@@ -4,15 +4,7 @@ block styles
     link(href='../style/index.scss', rel="stylesheet")
 block scripts
     script(type='text/javascript', src='../bin/require.js')
-block script
-    script(type='text/javascript').
-        require.config({
-            baseUrl: '../'
-        })
-        require(['/script/index.js'], function(l){
-            console.log(l)
-        })        
-
+    script(type='text/javascript', src='../script/r.js')
 
 block content
     nav.nav
