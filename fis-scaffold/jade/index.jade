@@ -1,0 +1,32 @@
+extend ../baseJade/layout.jade
+
+block styles
+    link(href='../style/index.scss', rel="stylesheet")
+block scripts
+    script(type='text/javascript', src='../bin/require.js')
+block script
+    script(type='text/javascript').
+        require.config({
+            baseUrl: '../'
+        })
+        require(['/script/index.js'], function(l){
+            console.log(l)
+        })        
+
+
+block content
+    nav.nav
+        img(src='http://blog.airbnb.com/wp-content/uploads/2015/06/10-Restonica1-800x550.jpg')
+        span.logo
+            span.icon.icon-home
+        span.menu
+            span.icon.icon-list
+        span.clear
+        div.head
+    div.content
+        div.ai-index-view
+            ul
+                li test
+        div.ai-menu-view.ai-move-menu
+            h1 menu-view
+            span.icon.icon-close

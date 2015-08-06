@@ -2,32 +2,22 @@ fis
     .media('dev')
     .match('**', {
         useHash: false
-    });
+    })
 
 fis
     .media('dev')
-    .match('*.scss', {
+    .match('style/*.scss', {
         parser: fis.plugin('sass'),
         rExt: '.css'
     })
 
-/*
-var jade = require('jade')
-var basedir = fis.project.getProjectPath();
 fis
-    .media('jade')
-    .match('*.jade', {
-        parser: function(content, file, settings){
-            settings.basedir = settings.basedir || basedir;
-            var template = jade.compile(content, settings)
-            template.dependencies.forEach(function(dep){
-                file.cache.addDeps(dep);
-            })
-            return template(data);
-        }
+    .media('dev')
+    .match('{style/script}/*.{js,css,scss}', {
+        release: '/static/$0'
     })
-*/
-/*********************************************************/
+
+
 fis
     .media('product')
     .match('script/*.js', {
@@ -64,7 +54,7 @@ fis
         'fis-conf.js',
     ])
 fis
-    .match('/mod/*.js', {
+    .match('{mod/*.js,mod/**/*.js}', {
         isMod: true                 
     })
 fis

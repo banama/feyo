@@ -16,7 +16,7 @@ var watchDog = function(build, migrate){
             console.log('no chage')
         }
         else{
-            remove()
+//            remove()
             build(program.product);
 
             if(program.migrate){
@@ -27,18 +27,18 @@ var watchDog = function(build, migrate){
 }
 
 var remove = function(){
-    exec('rm -rf ./dist/')
+    exec('rm -rf ../dist/')
 }
 
 var build = function(product){
     if(product){
-        exec('fis3 release -d ../dist product', function(error, stdout, stderr){
+        exec('fis3 release -cwd ../dist product', function(error, stdout, stderr){
             console.log('err: ', error)
             console.log('out: ', stdout)
             console.log('stderr:', stderr)
         })
     }
-    exec('fis3 release -d ../dist', function(error, stdout, stderr){
+    exec('fis3 release -cwd ../dist', function(error, stdout, stderr){
         console.log(error, stdout, stderr);
     })
 }
